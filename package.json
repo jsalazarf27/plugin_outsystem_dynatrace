@@ -51,7 +51,7 @@
   ],
   "license": "private",
   "name": "dynatrace-cordova-outsystems-plugin",
-  "version": "7.3.5",
+  "version": "7.3.9",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dlopes7/dynatrace-cordova-outsystems-plugin.git"

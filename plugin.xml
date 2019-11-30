@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns:tag0="http://apache.org/cordova/ns/plugins/1.0" id="dynatrace-cordova-outsystems-plugin" version="7.3.5">
+<plugin xmlns:tag0="http://apache.org/cordova/ns/plugins/1.0" id="dynatrace-cordova-outsystems-plugin" version="7.3.9">
   <name>Dynatrace Outsystems</name>
   <description>Dynatrace Cordova Outsystems Plugin</description>
 

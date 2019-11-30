@@ -31,7 +31,11 @@ public class DynatraceCordovaPlugin extends CordovaPlugin {
 	public static final String ACTION_UEM_ENTER_ACTION = "enterAction";
 	public static final String ACTION_UEM_LEAVE_ACTION = "leaveAction";
 
-	public HashMap<String, DTXActionImpl> currentActions;
+	public static final HashMap<String, DTXActionImpl> currentActions;
+
+	static {
+		currentActions = new HashMap<String, DTXActionImpl>();
+	}
 
 	
 	@Override
@@ -44,7 +48,6 @@ public class DynatraceCordovaPlugin extends CordovaPlugin {
 
 			int status = Dynatrace.startup(context, configuration);
 			System.out.println("Dynatrace - status code: " + String.valueOf(status));
-			currentActions = new HashMap();
 
 	}
 
@@ -58,8 +61,11 @@ public class DynatraceCordovaPlugin extends CordovaPlugin {
 				return true;
 			}
 			if (method.equals(ACTION_UEM_ENTER_ACTION)) {
-				DTXActionImpl action = (DTXActionImpl) Dynatrace.enterAction(args.getJSONObject(0).getString("name"));
+				String name = args.getJSONObject(0).getString("name");
+
+				DTXActionImpl action = (DTXActionImpl) Dynatrace.enterAction(name);
 				String actionId = action.getName() + "_" + String.valueOf(action.getTagId());
+				System.out.println("Starting action: " + name + ", ID: " + actionId);
 
 				JSONObject returnMessage = new JSONObject();
 				returnMessage.put("ActionID", actionId);
@@ -69,12 +75,15 @@ public class DynatraceCordovaPlugin extends CordovaPlugin {
 				return true;
 			}
 			if (method.equals(ACTION_UEM_LEAVE_ACTION)) {
-				DTXActionImpl action = currentActions.get(args.getJSONObject(0).getString("name"));
+				String name = args.getJSONObject(0).getString("name");
+				System.out.println("Attempting to end action: " + name);
+				DTXActionImpl action = currentActions.get(name);
+				// System.out.println("Got back action: " + String.valueOf(action));
 				if (action != null) {
 					int code = action.leaveAction();
 					JSONObject returnMessage = new JSONObject();
 					returnMessage.put("Code", String.valueOf(code));
-					Dynatrace.endVisit();
+					currentActions.remove(name)
 					callbackContext.success(code);
 				}
 				
