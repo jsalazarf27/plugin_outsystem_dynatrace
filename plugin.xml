@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns:tag0="http://apache.org/cordova/ns/plugins/1.0" id="dynatrace-cordova-outsystems-plugin" version="7.3.0">
+<plugin xmlns:tag0="http://apache.org/cordova/ns/plugins/1.0" id="dynatrace-cordova-outsystems-plugin" version="7.3.5">
   <name>Dynatrace Outsystems</name>
   <description>Dynatrace Cordova Outsystems Plugin</description>
-  <hook src="scripts/update-platform.js" type="after_prepare"/>
-  <hook src="scripts/close-log.js" type="after_build"/>
-  <hook src="scripts/close-log.js" type="after_run"/>
+
   <platform name="ios">
     <framework src="libsqlite3.dylib"/>
     <framework src="CoreLocation.framework"/>
@@ -36,11 +34,14 @@
         <param name="android-package" value="com.dynatrace.cordova.plugin.DynatraceCordovaPlugin"/>
       </feature>
     </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET"/>
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    </config-file>
     <js-module src="other/DynatraceCordovaPlugin.js" name="dynatraceMobile">
       <clobbers target="dynatraceMobile"/>
     </js-module>
-    <hook src="scripts/update-build-android.js" type="after_compile"/>
-    <hook src="scripts/update-build-android.js" type="before_deploy"/>
+
   </platform>
   <platform name="windows"/>
 </plugin>
