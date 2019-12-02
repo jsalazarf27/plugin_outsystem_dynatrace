@@ -4,6 +4,8 @@
 
 This plugin is a wrapper around the Dynatrace Cordova plugin, to be used with OutSystems
 
+### This is NOT supported by Dynatrace, it is just an example of how to integrate the Cordova plugin into Outsystems.
+
 ## Installation
 
 Import the `DynatracePlugin.oml` file into Service Studio. You can then add it as a dependency to your apps.
