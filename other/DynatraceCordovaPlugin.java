@@ -83,7 +83,7 @@ public class DynatraceCordovaPlugin extends CordovaPlugin {
 					int code = action.leaveAction();
 					JSONObject returnMessage = new JSONObject();
 					returnMessage.put("Code", String.valueOf(code));
-					currentActions.remove(name)
+					currentActions.remove(name);
 					callbackContext.success(code);
 				}
 				
